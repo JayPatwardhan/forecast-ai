@@ -35,11 +35,10 @@ export default class Login extends Component {
         loginForm.append("password", this.state.password);
         //const jsonLogin = {"email": this.state.username, "password": this.state.password};
         const response = await this.sendreq(loginForm)
-        if (response.token !== 'Login Unsuccessful'){
-            this.setState((state) => {
-                return {LoggedIn: true, username: response.name, first: true, token: response.token};
-            });
-
+        console.log(response)
+        if (response !== 'Login Unsuccessful'){
+            this.props.toggleLoggedIn()
+            this.props.setToken(response.token)
         }
     }
 
@@ -52,14 +51,14 @@ export default class Login extends Component {
 
 
     render() {
-        if (this.state.LoggedIn === false) {
+        if (this.props.isLoggedIn === false) {
             return (
                 <form onSubmit = {this.handleSubmit} className = 'form'>
                     <h3>Log In</h3>
 
                     <div className="form-group">
                         <label>Username</label>
-                        <input type="email" className="form-control" onChange = {this.myChangeHandlerUserName} placeholder="Enter username" />
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerUserName} placeholder="Enter username" />
                     </div>
 
                     <div className="form-group">
@@ -74,7 +73,7 @@ export default class Login extends Component {
                 </form>
             );
         }
-        else if (this.state.first === true){
+        else {
             return(
                 <h1>Hello</h1>
             );

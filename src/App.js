@@ -1,3 +1,4 @@
+import React, {Component} from 'react' ;
 import './App.css';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -5,17 +6,42 @@ import Home from './Pages/index'
 import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 
-function App() {
-  return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/Signup" component={Signup} />
-        <Route path="/Login" component={Login} />
-      </Switch>
-    </Router>
-  );
-}
+export default class App extends Component{
 
-export default App;
+  state = {
+      isLoggedIn: false,
+      token: null
+  }
+
+  toggleLoggedFalse = () => {
+      this.setState({
+        isLoggedIn: false
+      });
+  };
+
+  setToken = (theToken) => {
+    this.setState({
+      token: theToken
+    })
+  }
+
+
+
+  render() {
+    return (
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/Signup" render={(props) => (<Signup/>)} />
+          <Route 
+            path="/Login" 
+            render={(props) => (
+              <Login isLoggedIn={this.state.isLoggedIn} toggleLoggedIn={this.toggleLoggedFalse} setToken={this.setToken}/>
+            )} 
+          />
+        </Switch>
+      </Router>
+    );
+  }
+}
