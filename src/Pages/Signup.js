@@ -7,9 +7,7 @@ export default class Signup extends Component {
     constructor(props){
         super(props);
         this.state = {
-            firstname: '',
-            lastname: '',
-            email: '',
+            username: '',
             password: '',
             SignedUp: false
         }
@@ -17,16 +15,8 @@ export default class Signup extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    myChangeHandlerFirstName = (event) => {
-        this.setState({firstname: event.target.value});
-    }
-
-    myChangeHandlerLastName = (event) => {
-        this.setState({lastname: event.target.value});
-    }
-
-    myChangeHandlerEmail = (event) => {
-        this.setState({email: event.target.value});
+    myChangeHandlerUsername = (event) => {
+        this.setState({username: event.target.value});
     }
 
     myChangeHandlerPassword = (event) => {
@@ -35,12 +25,14 @@ export default class Signup extends Component {
 
     async handleSubmit(event) {
         event.preventDefault()
+        const formData = new FormData()
+        formData.append("username", this.state.username);
+        formData.append("password", this.state.password);
         const jsonSignUp = {
-            "name": this.state.firstname + ' ' + this.state.lastname, 
-            "email": this.state.email,
+            "username": this.state.username,
             "password": this.state.password,
         };
-        const signed = await this.sendreq(jsonSignUp)
+        const signed = await this.sendreq(formData)
         if (signed === 'success'){
             this.setState((state) => {
                 return {SignedUp: true};
@@ -54,7 +46,7 @@ export default class Signup extends Component {
     }
 
     async sendreq(jsonSignUp){
-        const {data: response} = await axios.post('http://localhost:3000/api/users', jsonSignUp)
+        const {data: response} = await axios.post('http://127.0.0.1:5000/newUser', jsonSignUp)
         return response;
     }
 
@@ -66,18 +58,8 @@ export default class Signup extends Component {
                         <h3>Sign Up</h3>
 
                         <div className="form-group">
-                            <label>First name</label>
-                            <input type="text" className="form-control" onChange = {this.myChangeHandlerFirstName} placeholder="First name" />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Last name</label>
-                            <input type="text" className="form-control" onChange = {this.myChangeHandlerLastName} placeholder="Last name" />
-                        </div>
-
-                        <div className="form-group">
-                            <label>Email address</label>
-                            <input type="email" className="form-control" onChange = {this.myChangeHandlerEmail} placeholder="Enter email" />
+                            <label>Username</label>
+                            <input type="text" className="form-control" onChange = {this.myChangeHandlerUsername} placeholder="Username" />
                         </div>
 
                         <div className="form-group">
@@ -87,7 +69,7 @@ export default class Signup extends Component {
 
                         <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                         <p className="forgot-password text-right">
-                            Already registered? <a href="/login">sign in</a>
+                            Already registered? <a href="/Login">Log In</a>
                         </p>
                     </form>
             );
@@ -95,8 +77,8 @@ export default class Signup extends Component {
             else{
                 return (
                 <div>
-                    <h1>Welcome, {this.state.firstname}</h1>
-                    <a href="/login">Click here to Log In!</a>
+                    <h1>Welcome, {this.state.username}</h1>
+                    <a href="/Login">Click here to Log In!</a>
                 </div>
                 );
             }

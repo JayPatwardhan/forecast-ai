@@ -8,10 +8,9 @@ export default class Login extends Component {
         super(props);
         this.state = {
             LoggedIn: false,
-            email: '',
+            username: '',
             password: '',
             first: false,
-            username: '',
             token: ''
         };
 
@@ -19,7 +18,7 @@ export default class Login extends Component {
     }
 
     myChangeHandlerUserName = (event) => {
-        this.setState({email: event.target.value});
+        this.setState({username: event.target.value});
     }
 
     myChangeHandlerPassword = (event) => {
@@ -31,9 +30,12 @@ export default class Login extends Component {
     //login click method
     async handleSubmit(event) {
         event.preventDefault()
-        const jsonLogin = {"email": this.state.email, "password": this.state.password};
-        const response = await this.sendreq(jsonLogin)
-        if (response.token !== -1 && response.token !== 'Invalid Login'){
+        const loginForm = new FormData()
+        loginForm.append("username", this.state.username);
+        loginForm.append("password", this.state.password);
+        //const jsonLogin = {"email": this.state.username, "password": this.state.password};
+        const response = await this.sendreq(loginForm)
+        if (response.token !== 'Login Unsuccessful'){
             this.setState((state) => {
                 return {LoggedIn: true, username: response.name, first: true, token: response.token};
             });
@@ -43,7 +45,7 @@ export default class Login extends Component {
 
     //sends login get request
     async sendreq(jsonLogin) {
-        const {data: response} = await axios.post('http://localhost:3000/api/auth',  jsonLogin);
+        const {data: response} = await axios.post('http://127.0.0.1:5000/Login',  jsonLogin);
         return response
     }
 
@@ -56,8 +58,8 @@ export default class Login extends Component {
                     <h3>Log In</h3>
 
                     <div className="form-group">
-                        <label>Email address</label>
-                        <input type="email" className="form-control" onChange = {this.myChangeHandlerUserName} placeholder="Enter email" />
+                        <label>Username</label>
+                        <input type="email" className="form-control" onChange = {this.myChangeHandlerUserName} placeholder="Enter username" />
                     </div>
 
                     <div className="form-group">
@@ -65,12 +67,6 @@ export default class Login extends Component {
                         <input type="password" className="form-control" onChange = {this.myChangeHandlerPassword} placeholder="Enter password" />
                     </div>
 
-                    <div className="form-group">
-                        <div className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                            <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                        </div>
-                    </div>
                     <button type="submit" className="btn btn-primary btn-block">Log In</button>
                     <p className="forgot-password text-right">
                             Forgot <a href="/">password?</a>
