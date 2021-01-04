@@ -7,7 +7,7 @@ const FileUpload = (props) => {
     const {register, handleSubmit} = useForm()
 
     const onSubmit = (data) => {
-        const formData = new FormData()
+        //const formData = new FormData()
         props.fData.append("file", data.csv[0]);
         props.history.push('/config');
         // axios.post('http://127.0.0.1:5000/sendCSV', formData, {

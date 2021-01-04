@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import yaml from 'js-yaml';
+import YAML from 'yaml';
+
 
 export default class configcomp extends Component {
 
@@ -22,14 +24,42 @@ export default class configcomp extends Component {
     }
 
     async handleSubmit(event) {
+        event.preventDefault()
         //parse the YAML file
+        const object = {
+            input_name: this.state.input_name,
+            output_name: this.state.output_name,
+            time_format_type: this.state.time_format_type,
+            forecast: {
+                horizon: parseInt(this.state.horizon)
+            },
+            backtest: {
+                evaluation_metric: this.state.eval_metric
+            },
+            hardware: {
+                use_gpu: this.state.use_gpu
+            }
+        }
+
+        if (this.state.backtest !== '') object['backtest']['backtest_start_time'] = parseInt(this.state.backtest)
+        if (this.state.display_metric !== '') object['backtest']['display_metric'] = this.state.display_metric
+        if (this.state.threads !== '') object['hardware']['threads'] = parseInt(this.state.threads)
+
+        //const yamlObject = yaml.dump(object, {'sortKeys': false});
+        const yamlObject = new YAML.Document()
+        yamlObject.contents = object
+        console.log(yamlObject);
+
+        this.props.fData.append("file2", yamlObject);
+        console.log(this.props.fData)
 
         //make request
-        axios.post('http://127.0.0.1:5000/sendCSV', props.fData, {
+        axios.post('http://127.0.0.1:5000/sendCSV', this.props.fData, {
             headers: {
-                "Authorization": props.token
+                "Authorization": this.props.token
             }
         }).then(res => console.log(res)).catch(err => console.warn(err))
+
 
     }
 
@@ -71,7 +101,7 @@ export default class configcomp extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className="form">
                 <h3>Configs</h3>
 
                 <div className="form-group">
