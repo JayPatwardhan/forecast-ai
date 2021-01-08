@@ -7,6 +7,7 @@ import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 import FileUpload from './Pages/FileUpload'
 import ConfigComp from './Pages/configComp'
+import DisplayResult from './Pages/DisplayResult'
 
 class App extends Component{
 
@@ -14,7 +15,8 @@ class App extends Component{
       isLoggedIn: false,
       token: null,
 
-      csvFile: new FormData()
+      csvFile: new FormData(),
+      Response_Result: ''
   }
 
   toggleLoggedFalse = () => {
@@ -54,9 +56,10 @@ class App extends Component{
         <Router>
           <Navbar />
           <Route path="/fileUpload" render={(props) => (<FileUpload {...props} fData={this.state.csvFile}/>)} />
-          <Route path="/config" render={(props) => (<ConfigComp {...props} fData={this.state.csvFile} token={this.state.token}/>)} />
+          <Route path="/config" render={(props) => (<ConfigComp {...props} fData={this.state.csvFile} token={this.state.token} res_result={this.state.Response_Result}/>)} />
+          <Route path="/displayResult" render={(props) => (<DisplayResult {...props} res_result={this.state.Response_Result} test={'hello'}/>)} />
         </Router>
-      )
+      );
     }
   }
 }
