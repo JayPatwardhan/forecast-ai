@@ -6,7 +6,7 @@ import download from 'downloadjs';
 import './configComp.css';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
-import * as d3 from 'd3';
+import { CsvToHtmlTable } from 'react-csv-to-table';
 
 const override = css`
   display: block;
@@ -37,21 +37,29 @@ export default class configcomp extends Component {
             display_metric: '',
             use_gpu: 'no',
             threads: 0,
+            algorithm: '',
 
             //not relating to form
-            submitted: ''
+            submitted: '',
+
+            response:false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     updateOnRes = (res) => {
-        const csvData = res.data
-        const newCSV = d3.csv(csvData, function(csvData) { console.log(csvData); });
-        this.props.res_result=newCSV;
-        console.log('1');
-        this.props.history.push('/displayResult');
-        console.log('2');
+        let csvData = res.data
+        //const newCSV = d3.csv(csvData, function(csvData) { console.log(csvData); });
+        //let newCSV = csvToJson.getJsonFromCsv(csvData)
+        //console.log(newCSV)
+        //this.props.res_result=csvData;
+        //console.log(this.props.res_result)
+        this.setState({response: csvData})
+        console.log(this.state.response)
+        download(this.state.response, 'result.csv', 'csv')
+        //console.log(this.state.respose)
+       //this.props.history.push('/displayResult');
     }
 
     async handleSubmit(event) {
@@ -73,6 +81,7 @@ export default class configcomp extends Component {
             }
         }
 
+        if (this.state.algorithm!=='') object['algorithms'] = this.state.algorithm
         if (this.state.backtest !== '') object['backtest']['backtest_start_time'] = parseInt(this.state.backtest)
         if (this.state.display_metric !== '') object['backtest']['display_metric'] = this.state.display_metric
         if (this.state.threads !== '') object['hardware']['threads'] = parseInt(this.state.threads)
@@ -104,6 +113,10 @@ export default class configcomp extends Component {
         })
         .catch(err => console.warn(err))
 
+    }
+
+    myChangeHandlerAlgorithm = (event) => {
+        this.setState({algorithm: event.target.value});
     }
 
     myChangeHandlerInputName = (event) => {
@@ -143,10 +156,15 @@ export default class configcomp extends Component {
     }
 
     render() {
-        if (this.state.submitted!==true){
+        if (this.state.submitted!==true && this.state.response===false){
             return (
                 <form onSubmit={this.handleSubmit} className="form">
                     <h3>Configs</h3>
+
+                    <div className="form-group">
+                        <label> Select Algorithm</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="algorithm name..." />
+                    </div>
 
                     <div className="form-group">
                         <label>Input Name</label>
@@ -198,13 +216,21 @@ export default class configcomp extends Component {
                 </form>
             );
         }
-        else{
+        else if (this.state.response===false && this.state.submitted===true){
             return (
                 //<Spinner animation="border" />
                 <div>
                     <ClimbingBoxLoader color={'#36D7B7'} loading={true} css={override} size={15} />
                     <strong style={loadTextStyle}>Please wait, as we generate your forecast!</strong>
                 </div>
+            );
+        }
+        else if (this.state.response!==''){
+            return (
+                <CsvToHtmlTable 
+                    data = {this.state.response}
+                    csvDelimiter=","
+                />
             );
         }
     }
