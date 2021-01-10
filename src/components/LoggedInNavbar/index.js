@@ -6,7 +6,7 @@ const NavbarLoggedIn = (props) => {
     return (
         <>
             <Nav>
-                <NavLink to="/">
+                <NavLink to="/userMenu">
                     <h1>TS API</h1>
                 </NavLink>
                 <Bars/>

@@ -39,7 +39,8 @@ export default class Login extends Component {
         if (response !== 'Login Unsuccessful'){
             this.props.toggleLoggedIn()
             this.props.setToken(response.token)
-            this.props.history.push('/fileUpload')
+            this.props.setUserName(this.state.username)
+            this.props.history.push('/userMenu')
         }
     }
 

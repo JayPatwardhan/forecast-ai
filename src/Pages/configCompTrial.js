@@ -3,7 +3,7 @@ import axios from 'axios';
 import yaml from 'js-yaml';
 import YAML from 'yaml';
 import download from 'downloadjs';
-import './configComp.css';
+import './configCompTrial.css';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import { CsvToHtmlTable } from 'react-csv-to-table';
@@ -197,6 +197,8 @@ export default class ConfigCompTrial extends Component {
                 <form onSubmit={this.handleSubmit} className="form">
                     <h3>Configs</h3>
 
+                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+
                     <div className="form-group">
                         <label> Select Algorithm</label>
                         <input type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="algorithm name..." />
@@ -246,8 +248,6 @@ export default class ConfigCompTrial extends Component {
                         <label>Threads to Use (optional)</label>
                         <input type="text" className="form-control" onChange = {this.myChangeHandlerThreads} placeholder="# threads (optional)" />
                     </div>
-
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
 
                 </form>
             );

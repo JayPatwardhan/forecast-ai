@@ -11,17 +11,23 @@ import ConfigComp from './Pages/configComp';
 import DisplayResult from './Pages/DisplayResult';
 import FileUploadTrial from './Pages/FileUploadTrial';
 import ConfigCompTrial from './Pages/configCompTrial.js';
+import UserMenu from './Pages/UserMenu';
 
 class App extends Component{
 
   state = {
       isLoggedIn: false,
       token: null,
+      username: '',
 
       csvFile: new FormData(),
       Response_Result: '',
 
       trial_input: new FormData()
+  }
+
+  setUserName = (name) => {
+    this.setState({username: name})
   }
 
   toggleLoggedFalse = () => {
@@ -41,7 +47,6 @@ class App extends Component{
       token: '',
       isLoggedIn: false
     });
-    console.log('Hello')
   }
 
 
@@ -57,7 +62,7 @@ class App extends Component{
             <Route 
               path="/Login" 
               render={(props) => (
-                <Login {...props} isLoggedIn={this.state.isLoggedIn} toggleLoggedIn={this.toggleLoggedFalse} setToken={this.setToken} />
+                <Login {...props} isLoggedIn={this.state.isLoggedIn} toggleLoggedIn={this.toggleLoggedFalse} setToken={this.setToken}  setUserName={this.setUserName}/>
               )} 
             />
             <Route path="/trial" render={(props) => (<FileUploadTrial {...props} fData={this.state.trial_input}/>)} />
@@ -74,6 +79,7 @@ class App extends Component{
               <Route path="/fileUpload" render={(props) => (<FileUpload {...props} fData={this.state.csvFile}/>)} />
               <Route path="/config" render={(props) => (<ConfigComp {...props} fData={this.state.csvFile} token={this.state.token} res_result={this.state.Response_Result}/>)} />
               <Route path="/displayResult" render={(props) => (<DisplayResult {...props} res_result={this.state.Response_Result} test={'hello'}/>)} />
+              <Route path="/userMenu" render={(props) => (<UserMenu {...props} username={this.state.username}/>)} />
             </Switch>
         </Router>
       );
