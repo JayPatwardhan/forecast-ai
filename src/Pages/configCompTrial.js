@@ -53,7 +53,7 @@ const initialState = {
 };
 
 
-export default class configComp extends Component {
+export default class ConfigCompTrial extends Component {
 
     constructor(props){
         super(props);
@@ -86,9 +86,8 @@ export default class configComp extends Component {
         //this.props.res_result=csvData;
         //console.log(this.props.res_result)
         this.setState({response: csvData})
-        //console.log(this.state.response)
-        this.props.fData.delete("file")
-        this.props.fData.delete("file2")
+        this.props.fData.delete('file')
+        this.props.fData.delete('file2')
         this.setState(initialState)
         //download(this.state.response, 'result.csv', 'csv')
         //console.log(this.state.respose)
@@ -118,24 +117,23 @@ export default class configComp extends Component {
         if (this.state.backtest !== '') object['backtest']['backtest_start_time'] = parseInt(this.state.backtest)
         if (this.state.display_metric !== '') object['backtest']['display_metric'] = this.state.display_metric
         if (this.state.threads !== '') object['hardware']['threads'] = parseInt(this.state.threads)
-        console.log(object)
 
         //const yamlObject = yaml.dump(object, {'sortKeys': false});
         const yamlObject = new YAML.Document()
         yamlObject.contents = object
-        console.log(object);
+        console.log(yamlObject);
 
         this.props.fData.append("file2", yamlObject);
-        //console.log(this.props.fData)
+        console.log(this.props.fData)
 
         this.setState({submitted: true});
 
-        //console.log(this.state.submitted)
+        console.log(this.state.submitted)
 
         //make request
         axios.post('http://127.0.0.1:5000/sendCSV', this.props.fData, {
             headers: {
-                "Authorization": this.props.token
+                "Authorization": "trial"
             }
         })
         //.then(res => download(res.data, 'result.csv', 'csv'))

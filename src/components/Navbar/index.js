@@ -17,6 +17,9 @@ const Navbar = () => {
                     <NavLink to="/About" activeStyle>
                         About
                     </NavLink>
+                    <NavLink to='/trial' activeStyle>
+                        Try it out!
+                    </NavLink>
                 </NavMenu>
                 <NavBtn>
                     <NavBtnLink to="/Login">
