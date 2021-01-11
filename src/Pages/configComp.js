@@ -50,6 +50,7 @@ const initialState = {
     use_gpu: 'no',
     threads: 0,
     algorithm: '',
+    save_data: ''
 };
 
 
@@ -68,6 +69,7 @@ export default class configComp extends Component {
             use_gpu: 'no',
             threads: 0,
             algorithm: '',
+            save_data: '',
 
             //not relating to form
             submitted:'',
@@ -114,6 +116,7 @@ export default class configComp extends Component {
             }
         }
 
+        if (this.state.save_data!=='') object["save_data"] = this.state.save_data
         if (this.state.algorithm!=='') object['algorithms'] = this.state.algorithm
         if (this.state.backtest !== '') object['backtest']['backtest_start_time'] = parseInt(this.state.backtest)
         if (this.state.display_metric !== '') object['backtest']['display_metric'] = this.state.display_metric
@@ -151,6 +154,10 @@ export default class configComp extends Component {
 
     clickDownload = () => {
         download(this.state.response, 'result.csv', 'csv')
+    }
+
+    myChangeHandlerSaveData = (event) => {
+        this.setState({save_data: event.target.value});
     }
 
     myChangeHandlerAlgorithm = (event) => {
@@ -198,6 +205,11 @@ export default class configComp extends Component {
             return (
                 <form onSubmit={this.handleSubmit} className="form">
                     <h3>Configs</h3>
+
+                    <div className="form-group">
+                        <label> Would you like to save this dataset?</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerSaveData} placeholder="yes/no" />
+                    </div>
 
                     <div className="form-group">
                         <label> Select Algorithm</label>

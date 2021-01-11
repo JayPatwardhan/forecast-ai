@@ -12,6 +12,7 @@ import DisplayResult from './Pages/DisplayResult';
 import FileUploadTrial from './Pages/FileUploadTrial';
 import ConfigCompTrial from './Pages/configCompTrial.js';
 import UserMenu from './Pages/UserMenu';
+import DataSelected from './Pages/DataSelected';
 
 class App extends Component{
 
@@ -23,8 +24,13 @@ class App extends Component{
       csvFile: new FormData(),
       Response_Result: '',
 
-      trial_input: new FormData()
+      trial_input: new FormData(),
+      selectedSavedData: ''
   }
+
+  setSelected = (inp) => {
+    this.setState({selectedSavedData: inp})
+  };
 
   setUserName = (name) => {
     this.setState({username: name})
@@ -79,7 +85,8 @@ class App extends Component{
               <Route path="/fileUpload" render={(props) => (<FileUpload {...props} fData={this.state.csvFile}/>)} />
               <Route path="/config" render={(props) => (<ConfigComp {...props} fData={this.state.csvFile} token={this.state.token} res_result={this.state.Response_Result}/>)} />
               <Route path="/displayResult" render={(props) => (<DisplayResult {...props} res_result={this.state.Response_Result} test={'hello'}/>)} />
-              <Route path="/userMenu" render={(props) => (<UserMenu {...props} username={this.state.username}/>)} />
+              <Route path="/userMenu" render={(props) => (<UserMenu {...props} username={this.state.username} token={this.state.token} setSelected={this.setSelected}/>)} />
+              <Route path="/selectedSavedData" render={(props) => (<DataSelected {...props} token={this.state.token} data_id={this.state.selectedSavedData}/>)} />
             </Switch>
         </Router>
       );
