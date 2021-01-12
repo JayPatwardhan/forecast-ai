@@ -25,7 +25,8 @@ class App extends Component{
       Response_Result: '',
 
       trial_input: new FormData(),
-      selectedSavedData: ''
+      selectedSavedData: '',
+      selectedFData: new FormData()
   }
 
   setSelected = (inp) => {
@@ -86,7 +87,7 @@ class App extends Component{
               <Route path="/config" render={(props) => (<ConfigComp {...props} fData={this.state.csvFile} token={this.state.token} res_result={this.state.Response_Result}/>)} />
               <Route path="/displayResult" render={(props) => (<DisplayResult {...props} res_result={this.state.Response_Result} test={'hello'}/>)} />
               <Route path="/userMenu" render={(props) => (<UserMenu {...props} username={this.state.username} token={this.state.token} setSelected={this.setSelected}/>)} />
-              <Route path="/selectedSavedData" render={(props) => (<DataSelected {...props} token={this.state.token} data_id={this.state.selectedSavedData}/>)} />
+              <Route path="/selectedSavedData" render={(props) => (<DataSelected {...props} token={this.state.token} data_id={this.state.selectedSavedData} fData={this.state.selectedFData}/>)} />
             </Switch>
         </Router>
       );
