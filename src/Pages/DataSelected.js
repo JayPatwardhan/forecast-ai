@@ -44,6 +44,7 @@ const DataSelected = (props) => {
 
     const afterResponse = (res) => {
         updateGot(res.data);
+        props.fData.delete("file");
     }
 
     const onSubmit = (data) => {
