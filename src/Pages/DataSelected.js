@@ -24,16 +24,28 @@ const loadTextStyle={
 const loadTextStyle2={
     position: 'relative',
     top: "150px",
-    left: "275px",
+    left: "125px",
     //font: "100000px"
 };
 
 const downloadButtonStyle={
     position: 'relative',
     top: "200px",
-    left: "20px",
+    left: "-225px",
     //font: "100000px"
 };
+
+const formStyle = {
+    position: 'absolute',
+    top: '250px',
+    left: '450px'
+};
+
+const headerStyle = {
+    position: 'absolute',
+    top: '100px',
+    left: '40px'
+}
 
 const DataSelected = (props) => {
 
@@ -70,7 +82,8 @@ const DataSelected = (props) => {
     if (submitted===false){
         return (
             <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <h2 style={headerStyle}>Please upload the new data you would like to append to this dataset to get newer forecasts</h2>
+                <form onSubmit={handleSubmit(onSubmit)} style={formStyle}>
                     <input ref={register} type="file" name="csv" />
                     <button>Submit</button>
                 </form>

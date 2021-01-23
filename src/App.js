@@ -13,6 +13,7 @@ import FileUploadTrial from './Pages/FileUploadTrial';
 import ConfigCompTrial from './Pages/configCompTrial.js';
 import UserMenu from './Pages/UserMenu';
 import DataSelected from './Pages/DataSelected';
+import AboutPage from './Pages/AboutPage';
 
 class App extends Component{
 
@@ -74,6 +75,7 @@ class App extends Component{
             />
             <Route path="/trial" render={(props) => (<FileUploadTrial {...props} fData={this.state.trial_input}/>)} />
             <Route path="/trialForm" render={(props) => (<ConfigCompTrial {...props} fData={this.state.trial_input}/>)} />
+            <Route path="/About" render={(props) => (<AboutPage {...props}/>)} />
           </Switch>
         </Router>
       );

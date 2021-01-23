@@ -3,6 +3,19 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 import './FileUpload.css'
 
+
+const formStyle = {
+    position: 'absolute',
+    top: '150px',
+    left: '450px'
+};
+
+const headerStyle = {
+    position: 'absolute',
+    top: '100px',
+    left: '435px'
+}
+
 const FileUpload = (props) => {
 
     const {register, handleSubmit} = useForm()
@@ -20,7 +33,8 @@ const FileUpload = (props) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <h2 style={headerStyle}>Please upload your csv file here!</h2>
+            <form onSubmit={handleSubmit(onSubmit)} style={formStyle}>
                 <input ref={register} type="file" name="csv" />
                 <button>Submit</button>
             </form>

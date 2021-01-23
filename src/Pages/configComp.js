@@ -21,21 +21,21 @@ const override = css`
 const loadTextStyle={
     position: 'relative',
     top: "100px",
-    left: "550px",
+    left: "475px",
     //font: "100000px"
 };
 
 const loadTextStyle2={
     position: 'relative',
     top: "150px",
-    left: "275px",
+    left: "45px",
     //font: "100000px"
 };
 
 const downloadButtonStyle={
     position: 'relative',
     top: "200px",
-    left: "20px",
+    left: "-295px",
     //font: "100000px"
 };
 
@@ -204,61 +204,61 @@ export default class configComp extends Component {
         if (this.state.submitted!==true && this.state.response===false){
             return (
                 <form onSubmit={this.handleSubmit} className="form">
-                    <h3>Configs</h3>
+                    <h3>Configs (all are optional)</h3>
 
                     <div className="form-group">
-                        <label> Would you like to save this dataset?</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerSaveData} placeholder="yes/no" />
+                        <label> Would you like to save this dataset? (yes/no)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerSaveData} placeholder="default: no" />
                     </div>
 
                     <div className="form-group">
-                        <label> Select Algorithm</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="algorithm name..." />
+                        <label> Select Algorithm (automl, nbeats, arima)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="default: automl" />
                     </div>
 
                     <div className="form-group">
                         <label>Input Name</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerInputName} placeholder="input name..." />
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerInputName} placeholder="default: input.csv" />
                     </div>
 
                     <div className="form-group">
                         <label>Output Name</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerOutputName} placeholder="output Name..." />
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerOutputName} placeholder="default: result.csv" />
                     </div>
 
                     <div className="form-group">
-                        <label>Time Format Type</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerTimeFormat} placeholder="standard or index" />
+                        <label>Time Format Type (standard or index)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerTimeFormat} placeholder="default: index" />
                     </div>
 
                     <div className="form-group">
-                        <label>Forecast Horizon</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerHorizon} placeholder="+horizon" />
+                        <label>Forecast Horizon (+ horizon desired)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerHorizon} placeholder="default: +3" />
                     </div>
 
                     <div className="form-group">
-                        <label>Backtest Start Time (Optional)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerBacktest} placeholder="-length" />
+                        <label>Backtest Start Time (- desired backtest start)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerBacktest} placeholder="default: last 10% of data" />
                     </div>
 
                     <div className="form-group">
-                        <label>Evaluation Metric</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerEvaluation} placeholder="Metric for algorithm to optimize on" />
+                        <label>Evaluation Metric (wape,mape,mae,mae%,rmse)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerEvaluation} placeholder="default: wape" />
                     </div>
 
                     <div className="form-group">
-                        <label>Display Metric (Optional)</label>
+                        <label>Display Metric (wape,mape,mae,mae%,rmse)</label>
                         <input type="text" className="form-control" onChange = {this.myChangeHandlerDisplay} placeholder="Other metrics to show" />
                     </div>
 
                     <div className="form-group">
-                        <label>Use GPU?</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerGPU} placeholder="yes/no" />
+                        <label>Use GPU? (yes/no)</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerGPU} placeholder="default: no" />
                     </div>
 
                     <div className="form-group">
-                        <label>Threads to Use (optional)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerThreads} placeholder="# threads (optional)" />
+                        <label>Threads to Use</label>
+                        <input type="text" className="form-control" onChange = {this.myChangeHandlerThreads} placeholder="default: 0" />
                     </div>
 
                     <button type="submit" className="btn btn-primary btn-block">Submit</button>

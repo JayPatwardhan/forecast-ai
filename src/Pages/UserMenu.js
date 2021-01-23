@@ -20,6 +20,12 @@ const getDataStyle = {
     left: '50px'
 };
 
+const SelectHeaderStyle = {
+    position: 'absolute',
+    top: '100px',
+    left: '50px'
+};
+
 export default class UserMenu extends Component{
 
     constructor(props){
@@ -83,6 +89,7 @@ export default class UserMenu extends Component{
         else{
             return (
                 <div>
+                    <h1 style={SelectHeaderStyle}>Please select which data you would like to work with!</h1>
                     {this.state.dataArray.map(this.makeDataButtons, this)}
                 </div>
             );
