@@ -3,6 +3,21 @@ import Typist from 'react-typist';
 import { Fade, Slide } from "react-awesome-reveal";
 import './AboutPage.css'
 import Table from 'react-bootstrap/Table';
+import styled, {createGlobalStyle, css} from 'styled-components';
+
+const GlobalStyle=createGlobalStyle`
+    html {
+        height: 100px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ECECF5;
+        height: 100%;
+        margin: 0;
+        color: #555;
+    }
+`;
 
 
 const HeaderStyle = {
@@ -40,6 +55,7 @@ export default class AboutPage extends Component {
     render () {
         return (
             <div>
+                <GlobalStyle/>
                 <Typist>
                     <h1 style={HeaderStyle}>About The API</h1>
                 </Typist>

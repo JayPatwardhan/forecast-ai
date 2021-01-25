@@ -1,13 +1,27 @@
 import React from 'react'
+import styled, {createGlobalStyle, css} from 'styled-components';
+
+const GlobalStyle=createGlobalStyle`
+    html {
+        height: 100px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #1B1B1B;
+        height: 100%;
+        margin: 0;
+        color: #555;
+    }
+`;
+
+//<div style={{width: "100%", height: "0", paddingNottom: "100%", position: "relative"}}><iframe src="https://giphy.com/embed/8gNQZ9IpkcdiAjfOgN" width="100%" height="100%" style={{position:"absolute"}} frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/illustration-marketing-data-8gNQZ9IpkcdiAjfOgN">via GIPHY</a></p>
 
 const Home = (props) => {
     return (
-        <div style={{display: 'flex', 
-        justofyContent: 'center', 
-        alignItems: 'center', 
-        height: '90vh'
-        }}>
-            <h1>Home</h1>
+        <div>
+        <GlobalStyle/>
+        
         </div>
     )
 }

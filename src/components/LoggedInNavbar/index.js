@@ -6,8 +6,8 @@ const NavbarLoggedIn = (props) => {
     return (
         <>
             <Nav>
-                <NavLink to="/userMenu">
-                    <h1>TS API</h1>
+                <NavLink style={{color: "#26688E"}} to="/userMenu">
+                    <h1>Forecast A(P)I</h1>
                 </NavLink>
                 <Bars/>
                 <NavBtn onClick={props.logOut}>

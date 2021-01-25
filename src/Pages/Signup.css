@@ -3,6 +3,16 @@
     margin: auto ;
     padding: 50px;
     box-sizing: border-box;
+
+    width: 100%;
+    max-width: 700px;
+    padding: 50px;
+    background-color: #000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+
+    position: absolute;
+    left: 100px;
 }
 
 input[type=text] {
@@ -17,4 +27,9 @@ input[type=password] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
+}
+
+#form button {
+    color: #3A3A3C;
+    background-color: #3A3A3C;
 }

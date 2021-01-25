@@ -7,8 +7,29 @@ import './configCompTrial.css';
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import { CsvToHtmlTable } from 'react-csv-to-table';
-import styled from "styled-components";
+//import styled from "styled-components";
 import Button from 'react-bootstrap/Button';
+import styled, {createGlobalStyle} from 'styled-components';
+
+const GlobalStyle=createGlobalStyle`
+    html {
+        height: 100px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #1B1B1B;
+        height: 100%;
+        margin: 0;
+        color: #555;
+    }
+`;
+
+const configFormStyle = {
+    position: 'absolute',
+    left: '400px',
+    top: '100px'
+};
 
 const override = css`
   display: block;
@@ -21,8 +42,9 @@ const override = css`
 const loadTextStyle={
     position: 'relative',
     top: "100px",
-    left: "475px",
+    left: "445px",
     //font: "100000px"
+    color: "#36D7B7"
 };
 
 const loadTextStyle2={
@@ -30,6 +52,7 @@ const loadTextStyle2={
     top: "150px",
     left: "45px",
     //font: "100000px"
+    color: "#36D7B7"
 };
 
 const downloadButtonStyle={
@@ -194,59 +217,63 @@ export default class ConfigCompTrial extends Component {
     render() {
         if (this.state.submitted!==true && this.state.response===false){
             return (
-                <form onSubmit={this.handleSubmit} className="form">
-                    <h3>Configs (all are optional)</h3>
+                <div>
+                <GlobalStyle/>
+                <form style={configFormStyle} onSubmit={this.handleSubmit} className="form">
+                    <h3 style={{color: "#26688E"}}>Configs (all are optional)</h3>
 
 
                     <div className="form-group">
-                        <label> Select Algorithm (automl, nbeats, arima)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="default: automl" />
+                        <label style={{color: "#36D7B7"}}> Select Algorithm (automl, nbeats, arima)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="default: automl" />
                     </div>
 
                     <div className="form-group">
-                        <label>Input Name</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerInputName} placeholder="default: input.csv" />
+                        <label style={{color: "#36D7B7"}}>Input Name</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerInputName} placeholder="default: input.csv" />
                     </div>
 
                     <div className="form-group">
-                        <label>Output Name</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerOutputName} placeholder="output name..." />
+                        <label style={{color: "#36D7B7"}}>Output Name</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerOutputName} placeholder="output name..." />
                     </div>
 
                     <div className="form-group">
-                        <label>Time Format Type (standard or index)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerTimeFormat} placeholder="default: index" />
+                        <label style={{color: "#36D7B7"}}>Time Format Type (standard or index)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerTimeFormat} placeholder="default: index" />
                     </div>
 
                     <div className="form-group">
-                        <label>Forecast Horizon (+ horizon desired)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerHorizon} placeholder="default: +3" />
+                        <label style={{color: "#36D7B7"}}>Forecast Horizon (+ horizon desired)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerHorizon} placeholder="default: +3" />
                     </div>
 
                     <div className="form-group">
-                        <label>Backtest Start Time (- desired backtest start)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerBacktest} placeholder="default: last 10% of data" />
+                        <label style={{color: "#36D7B7"}}>Backtest Start Time (- desired backtest start)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerBacktest} placeholder="default: last 10% of data" />
                     </div>
 
                     <div className="form-group">
-                        <label>Evaluation Metric (wape,mape,mae,mae%,rmse)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerEvaluation} placeholder="default: wape" />
+                        <label style={{color: "#36D7B7"}}>Evaluation Metric (wape,mape,mae,mae%,rmse)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerEvaluation} placeholder="default: wape" />
                     </div>
 
                     <div className="form-group">
-                        <label>Display Metric (wape,mape,mae,mae%,rmse)</label>
-                        <input type="text" className="form-control" onChange = {this.myChangeHandlerDisplay} placeholder="default: none" />
+                        <label style={{color: "#36D7B7"}}>Display Metric (wape,mape,mae,mae%,rmse)</label>
+                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerDisplay} placeholder="default: none" />
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                    <button style={{backgroundColor: "#26688E", borderColor: "#26688E"}} type="submit" className="btn btn-primary btn-block">Submit</button>
 
                 </form>
+                </div>
             );
         }
         else if (this.state.response===false && this.state.submitted===true){
             return (
                 //<Spinner animation="border" />
                 <div>
+                    <GlobalStyle/>
                     <ClimbingBoxLoader color={'#36D7B7'} loading={true} css={override} size={15} />
                     <strong style={loadTextStyle}>Please wait, as we generate your forecast!</strong>
                 </div>
@@ -255,6 +282,7 @@ export default class ConfigCompTrial extends Component {
         else if (this.state.response!==false){
             return (
                 <>
+                    <GlobalStyle/>
                     <strong style={loadTextStyle}>Your results are ready!</strong>
                     <strong style={loadTextStyle2}>Click to download your .csv file with your results</strong>
                     <Button variant="outline-primary" style={downloadButtonStyle} size='lg' onClick={this.clickDownload}>Download</Button>{' '}

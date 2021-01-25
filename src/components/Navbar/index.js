@@ -6,8 +6,8 @@ const Navbar = () => {
     return (
         <>
             <Nav>
-                <NavLink to="/">
-                    <h1>TS API</h1>
+                <NavLink style={{color: "#26688E"}} to="/">
+                    <h1>Forecast A(P)I</h1>
                 </NavLink>
                 <Bars/>
                 <NavMenu>
