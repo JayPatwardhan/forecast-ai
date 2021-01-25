@@ -124,6 +124,8 @@ const FileUploadTrial = (props) => {
                     <input style={{color: "#26688E"}}f ref={register} type="file" name="csv" />
                     <button className="btn btn-primary btn-block" style={{margin: '10px', position: 'relative', left: '0px', top: '20px', backgroundColor: "#26688E", borderColor: "#26688E"}}>Upload</button>
                 </form>
+                <h4 style={{position: 'absolute', top: '400px', left: '50px', color: '#fff'}}>Upload your data as a .csv file here, and get the forecasts you desire!</h4>
+                <h4 style={{position: 'absolute', top: '450px', left: '50px', color: '#fff'}}>To see how your data should be formatted in further detail, please refer to <a href='/About' style={{color: '#36D7B7'}}> About </a></h4>
         </div>
     );
 }
