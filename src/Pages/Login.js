@@ -18,9 +18,8 @@ const GlobalStyle=createGlobalStyle`
 `;
 
 const logInStyle = {
-    position: 'absolute',
-    left: '450px',
-    top: '150px'
+    position: 'relative',
+    top: '65px'
 }
 
 export default class Login extends Component {

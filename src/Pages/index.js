@@ -2,6 +2,7 @@ import React from 'react'
 import styled, {createGlobalStyle, css} from 'styled-components';
 import HomeChart from '../components/HomeChart';
 import { Fade} from "react-awesome-reveal";
+import UserMenuButton  from '../components/UserMenuButton'
 
 const GlobalStyle=createGlobalStyle`
     html {
@@ -17,14 +18,18 @@ const GlobalStyle=createGlobalStyle`
     }
 `;
 
+
 const chartStyle = {
     width: '500px',
-    position: 'absolute',
+    position: 'relative',
     //top: '120px',
     //left: '25px'
-    top: '200px',
+    top: '100px',
     left: '400px'
 };
+
+
+
 
 const headerStyle = {
     position: 'absolute',
@@ -49,4 +54,4 @@ const Home = (props) => {
     )
 }
 
-export default Home
+export default Home;

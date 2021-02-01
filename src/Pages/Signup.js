@@ -4,9 +4,8 @@ import axios from 'axios';
 import styled, {createGlobalStyle, css} from 'styled-components';
 
 const signInStyle = {
-    position: 'absolute',
-    left: '450px',
-    top: '150px'
+    position: 'relative',
+    top: '65px'
 }
 
 //#3A3A3C

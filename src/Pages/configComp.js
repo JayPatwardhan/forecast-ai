@@ -41,7 +41,7 @@ const configFormStyle = {
 const loadTextStyle={
     position: 'relative',
     top: "100px",
-    left: "445px",
+    left: "475px",
     //font: "100000px"
     color: "#36D7B7"
 };

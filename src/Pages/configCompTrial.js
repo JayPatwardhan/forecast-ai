@@ -103,6 +103,7 @@ export default class ConfigCompTrial extends Component {
 
     updateOnRes = (res) => {
         let csvData = res.data
+        console.log(csvData.split(','))
         //const newCSV = d3.csv(csvData, function(csvData) { console.log(csvData); });
         //let newCSV = csvToJson.getJsonFromCsv(csvData)
         //console.log(newCSV)

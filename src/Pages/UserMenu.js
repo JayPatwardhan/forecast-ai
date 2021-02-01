@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import styled, {createGlobalStyle, css} from 'styled-components';
+import { DataGrid } from '@material-ui/data-grid';
+import { makeStyles, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const darkTheme = createMuiTheme({
+    palette: {
+      type: 'dark',
+    },
+  });
 
 const GlobalStyle=createGlobalStyle`
     html {
@@ -16,6 +26,7 @@ const GlobalStyle=createGlobalStyle`
         color: #555;
     }
 `;
+
 
 const welcomeStyle = {
     position: 'absolute',
@@ -36,8 +47,7 @@ const getDataStyle = {
     position: 'absolute',
     top: '275px',
     left: '50px',
-    color: "#26688E",
-    borderColor: "#26688E"
+    color: "#36D7B7",
 };
 
 const SelectHeaderStyle = {
@@ -45,6 +55,13 @@ const SelectHeaderStyle = {
     top: '100px',
     left: '50px'
 };
+
+const columns = [
+    {field:'id', headerName: 'index', width: 100},
+    {field: 'dataName', headerName: 'Dataset Name', width: 180, description: "The given name on the dataset"},
+    {field: 'dataID', headerName: 'Dataset ID', width: 180, description: "The unique data ID that identifies this dataset as listed in your downloaded results"}
+
+]
 
 export default class UserMenu extends Component{
 
@@ -54,8 +71,35 @@ export default class UserMenu extends Component{
             getDataClicked: false,
             dataArray: '',
             leftVar: '50px',
-            leftTrack:50
+            leftTrack:50,
+            rows: [],
+            selected: null
         };
+    }
+
+    handleTableData = (res) => {
+        var rowsArray=[]
+        var counter= 0
+        for (var i in res){
+            rowsArray.push({id: counter, dataName: res[i], dataID: i})
+            counter+=1;
+        }
+
+        console.log(rowsArray);
+        this.setState({rows: rowsArray});
+    }
+
+    componentDidMount() {
+        console.log('Hello World');
+        axios.get('http://127.0.0.1:5000/getSavedData', {
+            headers: {
+                "Authorization": this.props.token
+            }
+        })
+        .then(res => {
+            this.handleTableData(res.data);
+        })
+        .catch(err => console.warn(err))
     }
 
     goToUpload = () => {
@@ -96,14 +140,51 @@ export default class UserMenu extends Component{
         .catch(err => console.warn(err))
     }
 
+    selectOperation = (selection) => {
+        this.setState({selected: parseInt(selection.rowIds[0])})
+        console.log(this.state.selected)
+        console.log(this.state.rows)
+    }
+
+    handleSelectDataClick = () => {
+        this.props.setSelected(this.state.rows[this.state.selected]['dataID']);
+        this.props.history.push('/selectedSavedData');
+    }
+
+    showButton = () => {
+        if(this.state.selected!==null){
+            return (
+                <div>
+                    <button 
+                        type="submit" 
+                        className="btn btn-primary btn-block"
+                        style={{color: '#000', backgroundColor: "#36D7B7", borderColor: "#36D7B7", width: '200px', position: 'absolute', top: '665px', left: '555px'}}
+                        onClick={() => {this.handleSelectDataClick()}}
+                    >
+                        Select Data
+                    </button>
+                    <DeleteIcon style={{position: 'absolute', top: '675px', left: '775px', color: "#D11A2A"}}/>
+                </div>
+            )
+        }
+    }
+    
+
     render () {
         if (this.state.getDataClicked===false){
             return (
                 <div>
                     <GlobalStyle/>
-                    <h1 style={welcomeStyle}>Hello {this.props.username}, what would you like to do?</h1>
-                    <Button variant="outline-primary" style={uploadDataButtonStyle} size='lg' onClick={this.goToUpload}>Upload New Data</Button>{' '}
-                    <Button variant="outline-primary" style={getDataStyle} size='lg' onClick={this.listDatasets}>Work With Previously Saved Data</Button>{' '}
+                    <h1 style={welcomeStyle}>Hello {this.props.username},</h1>
+                    <Button variant="btn btn-primary btn-block" style={{backgroundColor: "#26688E", borderColor: "#26688E", width: '350px', position: 'absolute', top: '175px', left: '50px'}} size='lg' onClick={this.goToUpload}>Upload New Data</Button>{' '}
+                    <h2 style={getDataStyle}>Work With Previously Saved Data</h2>{' '}
+
+                    <div style={{ height: 300, width: '40%', position: 'absolute', top: '350px', left: '375px' }}>
+                        <ThemeProvider theme={darkTheme}>
+                        <DataGrid rows={this.state.rows} columns={columns} pageSize={5} disableMultipleSelection={true} onSelectionChange={(newSelection) => {this.selectOperation(newSelection)}} />
+                        </ThemeProvider>
+                    </div>
+                    {this.showButton()}
                 </div>
             );
         }
