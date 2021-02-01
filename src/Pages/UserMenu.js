@@ -7,11 +7,6 @@ import { makeStyles, ThemeProvider } from "@material-ui/core";
 import { createMuiTheme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const darkTheme = createMuiTheme({
-    palette: {
-      type: 'dark',
-    },
-  });
 
 const GlobalStyle=createGlobalStyle`
     html {
@@ -56,12 +51,6 @@ const SelectHeaderStyle = {
     left: '50px'
 };
 
-const columns = [
-    {field:'id', headerName: 'index', width: 100},
-    {field: 'dataName', headerName: 'Dataset Name', width: 180, description: "The given name on the dataset"},
-    {field: 'dataID', headerName: 'Dataset ID', width: 180, description: "The unique data ID that identifies this dataset as listed in your downloaded results"}
-
-]
 
 export default class UserMenu extends Component{
 
@@ -151,6 +140,33 @@ export default class UserMenu extends Component{
         this.props.history.push('/selectedSavedData');
     }
 
+    frontendDeleteRow = (res) => {
+        var update = this.state.rows
+        update.splice(this.state.selected, 1)
+        var counter = 0;
+        for(var i=0; i < update.length; i++){
+            update[i].id=counter.toString()
+            counter+=1
+        }
+        this.setState({rows: []});
+        this.setState({rows: update});
+        this.setState({selected: null});
+        //this.forceUpdate();
+    }
+
+    deleteDataRow = () => {
+        axios.delete('http://127.0.0.1:5000/deleteData', {
+            headers: {
+                "Authorization": this.props.token,
+                "data_id": this.state.rows[this.state.selected]['dataID']
+            }
+        })
+        .then(res => {
+            this.frontendDeleteRow(res);
+        })
+        .catch(err => console.warn(err))
+    }
+
     showButton = () => {
         if(this.state.selected!==null){
             return (
@@ -163,7 +179,7 @@ export default class UserMenu extends Component{
                     >
                         Select Data
                     </button>
-                    <DeleteIcon style={{position: 'absolute', top: '675px', left: '775px', color: "#D11A2A"}}/>
+                    <DeleteIcon style={{position: 'absolute', top: '675px', left: '775px', color: "#D11A2A"}} onClick={() => {this.deleteDataRow()}}/>
                 </div>
             )
         }
@@ -171,6 +187,20 @@ export default class UserMenu extends Component{
     
 
     render () {
+
+        const columns = [
+            {field:'id', headerName: 'index', width: 100},
+            {field: 'dataName', headerName: 'Dataset Name', width: 180, description: "The given name on the dataset"},
+            {field: 'dataID', headerName: 'Dataset ID', width: 180, description: "The unique data ID that identifies this dataset as listed in your downloaded results"}
+        
+        ]
+
+        const darkTheme = createMuiTheme({
+            palette: {
+              type: 'dark',
+            },
+          });
+
         if (this.state.getDataClicked===false){
             return (
                 <div>

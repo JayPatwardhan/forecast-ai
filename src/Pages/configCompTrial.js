@@ -225,7 +225,7 @@ export default class ConfigCompTrial extends Component {
 
 
                     <div className="form-group">
-                        <label style={{color: "#36D7B7"}}> Select Algorithm (automl, nbeats, arima)</label>
+                        <label style={{color: "#36D7B7"}}> Select Algorithm (automl, nbeats, arima, regression)</label>
                         <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerAlgorithm} placeholder="default: automl" />
                     </div>
 
