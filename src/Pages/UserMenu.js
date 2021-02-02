@@ -6,6 +6,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import { makeStyles, ThemeProvider } from "@material-ui/core";
 import { createMuiTheme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Slide, Fade } from "react-awesome-reveal";
 
 
 const GlobalStyle=createGlobalStyle`
@@ -21,6 +22,12 @@ const GlobalStyle=createGlobalStyle`
         color: #555;
     }
 `;
+
+const HoverText = styled.div`
+	:hover {
+		cursor: pointer;
+	}
+`
 
 
 const welcomeStyle = {
@@ -179,7 +186,9 @@ export default class UserMenu extends Component{
                     >
                         Select Data
                     </button>
+                    <HoverText>
                     <DeleteIcon style={{position: 'absolute', top: '675px', left: '775px', color: "#D11A2A"}} onClick={() => {this.deleteDataRow()}}/>
+                    </HoverText>
                 </div>
             )
         }
@@ -208,12 +217,13 @@ export default class UserMenu extends Component{
                     <h1 style={welcomeStyle}>Hello {this.props.username},</h1>
                     <Button variant="btn btn-primary btn-block" style={{backgroundColor: "#26688E", borderColor: "#26688E", width: '350px', position: 'absolute', top: '175px', left: '50px'}} size='lg' onClick={this.goToUpload}>Upload New Data</Button>{' '}
                     <h2 style={getDataStyle}>Work With Previously Saved Data</h2>{' '}
-
+                    <Fade>
                     <div style={{ height: 300, width: '40%', position: 'absolute', top: '350px', left: '375px' }}>
                         <ThemeProvider theme={darkTheme}>
                         <DataGrid rows={this.state.rows} columns={columns} pageSize={5} disableMultipleSelection={true} onSelectionChange={(newSelection) => {this.selectOperation(newSelection)}} />
                         </ThemeProvider>
                     </div>
+                    </Fade>
                     {this.showButton()}
                 </div>
             );

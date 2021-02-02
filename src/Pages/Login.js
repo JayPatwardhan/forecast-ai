@@ -31,7 +31,8 @@ export default class Login extends Component {
             username: '',
             password: '',
             first: false,
-            token: ''
+            token: '',
+            wrongLogin:false
         };
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -55,12 +56,15 @@ export default class Login extends Component {
         loginForm.append("password", this.state.password);
         //const jsonLogin = {"email": this.state.username, "password": this.state.password};
         const response = await this.sendreq(loginForm)
-        console.log(response)
-        if (response !== 'Login Unsuccessful'){
+        console.log(response.token)
+        if (response.token !== 'Invalid username and/or password'){
             this.props.toggleLoggedIn()
             this.props.setToken(response.token)
             this.props.setUserName(this.state.username)
             this.props.history.push('/userMenu')
+        }
+        else{
+            this.setState({wrongLogin: true});
         }
     }
 
@@ -68,6 +72,14 @@ export default class Login extends Component {
     async sendreq(jsonLogin) {
         const {data: response} = await axios.post('http://127.0.0.1:5000/Login',  jsonLogin);
         return response
+    }
+
+    displayWrongPassword = () => {
+        if(this.state.wrongLogin === true){
+            return (
+                <p style={{color: "#e60000"}}> Invalid username and/or password</p>
+            );
+        }
     }
 
 
@@ -94,6 +106,7 @@ export default class Login extends Component {
                     <p className="forgot-password text-right">
                             Forgot <a style={{color: "#26688E"}} href="/">password?</a>
                     </p>
+                    {this.displayWrongPassword()}
                 </form>
                 </div>
             );
