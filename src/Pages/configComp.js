@@ -158,7 +158,7 @@ export default class configComp extends Component {
         //console.log(this.state.submitted)
 
         //make request
-        axios.post('http://127.0.0.1:5000/sendCSV', this.props.fData, {
+        axios.post('https://forecast-6j2gkews6a-uw.a.run.app/sendCSV', this.props.fData, {
             headers: {
                 "Authorization": this.props.token
             }

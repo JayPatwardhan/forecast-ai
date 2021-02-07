@@ -87,7 +87,7 @@ export default class UserMenu extends Component{
 
     componentDidMount() {
         console.log('Hello World');
-        axios.get('http://127.0.0.1:5000/getSavedData', {
+        axios.get('https://forecast-6j2gkews6a-uw.a.run.app/getSavedData', {
             headers: {
                 "Authorization": this.props.token
             }
@@ -125,7 +125,7 @@ export default class UserMenu extends Component{
     };
 
     listDatasets = () => {
-        axios.get('http://127.0.0.1:5000/getSavedData', {
+        axios.get('https://forecast-6j2gkews6a-uw.a.run.app/getSavedData', {
             headers: {
                 "Authorization": this.props.token
             }
@@ -162,7 +162,7 @@ export default class UserMenu extends Component{
     }
 
     deleteDataRow = () => {
-        axios.delete('http://127.0.0.1:5000/deleteData', {
+        axios.delete('https://forecast-6j2gkews6a-uw.a.run.app/deleteData', {
             headers: {
                 "Authorization": this.props.token,
                 "data_id": this.state.rows[this.state.selected]['dataID']

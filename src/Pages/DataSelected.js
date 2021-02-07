@@ -81,7 +81,7 @@ const DataSelected = (props) => {
         //const formData = new FormData()
         updateSubmitted(!submitted);
         props.fData.append("file", data.csv[0]);
-        axios.post('http://127.0.0.1:5000/updateAndPredict', props.fData, {
+        axios.post('https://forecast-6j2gkews6a-uw.a.run.app/updateAndPredict', props.fData, {
             headers: {
                 "Authorization": props.token,
                 "data_id": props.data_id
