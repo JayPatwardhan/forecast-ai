@@ -2,7 +2,7 @@
   "name": "ts_api_frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://JayPatwardhan.github.io/TS_API_Frontend",
+  "homepage": "https://JayPatwardhan.github.io/forecast-api-frontend",
   "dependencies": {
     "@agney/react-loading": "^0.1.2",
     "@material-ui/core": "^4.11.3",
