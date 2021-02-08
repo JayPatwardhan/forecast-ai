@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/forecast-ai/static/css/main.bb3252ed.chunk.css",
-    "main.js": "/forecast-ai/static/js/main.fb47e0a8.chunk.js",
-    "main.js.map": "/forecast-ai/static/js/main.fb47e0a8.chunk.js.map",
+    "main.js": "/forecast-ai/static/js/main.9d4eb8e1.chunk.js",
+    "main.js.map": "/forecast-ai/static/js/main.9d4eb8e1.chunk.js.map",
     "runtime-main.js": "/forecast-ai/static/js/runtime-main.34f2a8d0.js",
     "runtime-main.js.map": "/forecast-ai/static/js/runtime-main.34f2a8d0.js.map",
     "static/css/2.20aa2d7b.chunk.css": "/forecast-ai/static/css/2.20aa2d7b.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.20aa2d7b.chunk.css",
     "static/js/2.eefe4a64.chunk.js",
     "static/css/main.bb3252ed.chunk.css",
-    "static/js/main.fb47e0a8.chunk.js"
+    "static/js/main.9d4eb8e1.chunk.js"
   ]
 }
