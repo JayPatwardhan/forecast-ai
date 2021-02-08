@@ -62,7 +62,7 @@ class App extends Component{
   render() {
     if (this.state.isLoggedIn===false){
       return (
-        <Router basename="/forecast-ai">
+        <Router>
           <Navbar/>
           <Switch>
             <Route path="/" exact component={Home} />
@@ -82,7 +82,7 @@ class App extends Component{
     }
     else{
       return (
-        <Router basename="/forecast-ai">
+        <Router>
             <LoggedInNavbar logOut={this.logOut}/>
             <Switch>
               <Route path="/fileUpload" render={(props) => (<FileUpload {...props} fData={this.state.csvFile}/>)} />
