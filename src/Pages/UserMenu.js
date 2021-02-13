@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Slide, Fade } from "react-awesome-reveal";
 
 
+
 const GlobalStyle=createGlobalStyle`
     html {
         height: 100px;
@@ -87,7 +88,7 @@ export default class UserMenu extends Component{
 
     componentDidMount() {
         console.log('Hello World');
-        axios.get('https://forecast-6j2gkews6a-uw.a.run.app/getSavedData', {
+        axios.get(this.props.url + '/getSavedData', {
             headers: {
                 "Authorization": this.props.token
             }
@@ -125,7 +126,7 @@ export default class UserMenu extends Component{
     };
 
     listDatasets = () => {
-        axios.get('https://forecast-6j2gkews6a-uw.a.run.app/getSavedData', {
+        axios.get(this.props.url + '/getSavedData', {
             headers: {
                 "Authorization": this.props.token
             }
@@ -162,7 +163,7 @@ export default class UserMenu extends Component{
     }
 
     deleteDataRow = () => {
-        axios.delete('https://forecast-6j2gkews6a-uw.a.run.app/deleteData', {
+        axios.delete(this.props.url + '/deleteData', {
             headers: {
                 "Authorization": this.props.token,
                 "data_id": this.state.rows[this.state.selected]['dataID']

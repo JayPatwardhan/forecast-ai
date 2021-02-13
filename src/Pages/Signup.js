@@ -68,7 +68,7 @@ export default class Signup extends Component {
     }
 
     async sendreq(jsonSignUp){
-        const {data: response} = await axios.post('https://forecast-6j2gkews6a-uw.a.run.app/newUser', jsonSignUp)
+        const {data: response} = await axios.post(this.props.url+'/newUser', jsonSignUp)
         return response;
     }
 

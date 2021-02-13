@@ -155,7 +155,7 @@ export default class ConfigCompTrial extends Component {
         console.log(this.state.submitted)
 
         //make request
-        axios.post('https://forecast-6j2gkews6a-uw.a.run.app/sendCSV', this.props.fData, {
+        axios.post(this.props.url + '/sendCSV', this.props.fData, {
             headers: {
                 "Authorization": "trial"
             }

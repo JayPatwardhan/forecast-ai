@@ -158,7 +158,7 @@ export default class configComp extends Component {
         //console.log(this.state.submitted)
 
         //make request
-        axios.post('https://forecast-6j2gkews6a-uw.a.run.app/sendCSV', this.props.fData, {
+        axios.post(this.props.url + '/sendCSV', this.props.fData, {
             headers: {
                 "Authorization": this.props.token
             }
@@ -273,11 +273,6 @@ export default class configComp extends Component {
                     <div className="form-group">
                         <label style={{color: "#36D7B7"}}>Display Metric (wape,mape,mae,mae%,rmse)</label>
                         <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerDisplay} placeholder="Other metrics to show" />
-                    </div>
-
-                    <div className="form-group">
-                        <label style={{color: "#fff"}}>Use GPU? (yes/no)</label>
-                        <input style={{backgroundColor: "#1B1B1B", borderColor:"#1B1B1B", color: '#fff'}} type="text" className="form-control" onChange = {this.myChangeHandlerGPU} placeholder="default: no" />
                     </div>
 
                     <div className="form-group">

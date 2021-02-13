@@ -70,7 +70,7 @@ export default class Login extends Component {
 
     //sends login get request
     async sendreq(jsonLogin) {
-        const {data: response} = await axios.post('https://forecast-6j2gkews6a-uw.a.run.app/Login',  jsonLogin);
+        const {data: response} = await axios.post(this.props.url + '/Login',  jsonLogin);
         return response
     }
 
